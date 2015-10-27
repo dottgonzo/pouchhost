@@ -1,0 +1,58 @@
+{
+  "name": "pouser",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon",
+    "forever": "forever cleanlogs && forever start --uid pouchhost index.js",
+    "server-update": "forever stop pouchhost&&git pull && npm run forever"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dottgonzo/pouser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dottgonzo/pouser/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "cookie-parser": "^1.3.5",
+    "cors": "^2.7.1",
+    "couchjsonconf": "0.0.7",
+    "cp": "^0.2.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-pouchdb": "^0.16.0",
+    "follow": "^0.12.1",
+    "fs": "0.0.2",
+    "http": "0.0.0",
+    "jsonwebtoken": "^5.0.5",
+    "lodash": "^3.10.1",
+    "mkdir-p": "0.0.6",
+    "nano": "^6.1.5",
+    "nodemailer": "^1.4.0",
+    "path-exists": "^2.0.0",
+    "pouchdb": "^4.0.0",
+    "pouchdb-authentication": "^0.4.1",
+    "promise": "^7.0.4",
+    "random-strings": "0.0.1",
+    "request": "^2.60.0",
+    "request-promise-json": "^1.0.4",
+    "simpler-config": "0.0.4",
+    "socket.io": "^1.3.7",
+    "socketio-jwt": "^4.3.1",
+    "uid": "0.0.2",
+    "url": "^0.11.0",
+    "url-parse": "^1.0.4",
+    "verbo": "0.0.7"
+  },
+  "devDependencies": {
+    "forever": "^0.15.1",
+    "nodemon": "^1.4.1",
+    "reload": "^0.4.0"
+  }
+}

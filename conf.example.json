@@ -1,0 +1,22 @@
+{
+  "couchdb":{
+"internal_url":{"protocol":"http",
+    "domain":"localhost",
+    "port":"5984"},
+    "external_url":{"protocol":"http",
+        "domain":"localhost",
+        "port":"5984"},
+    "username":"admin",
+    "password":"test"
+  },
+  "mail":{
+    "user":"",
+    "password":"",
+    "senderAddr":"Fred Foo ✔ <foo@blurdybloop.com>"
+  },
+  "host":{
+    "url":"http://localhost:5000",
+    "port":"5000"
+  },
+  "secret":"8cvQy98y4v9pO8bFy9pcF787xbwY48d8Jd3bKd3d"
+}

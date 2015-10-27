@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="/lib/jquery.min.js"></script>
+<!--<script src="/lib/pouchdb.min.js"></script>
+<script src="/lib/pouchdb.authentication.min.js"></script>-->
+
+  </head>
+  <body>
+<div id="vbody"></div>
+<script>
+
+
+var username = sessionStorage.getItem('adminUser');
+
+var passw = sessionStorage.getItem('adminPassw');
+
+
+$(window).load(function(){
+  if(username,passw){
+    testUser(username,passw);
+  } else {
+
+    loadlogin();
+
+  }
+});
+
+
+function loadlogin(){
+  $('#vbody').html('<input type="text" id="username"><br><input type="text" id="passw"><br><button onclick="saveUser()">login</button>');
+
+
+}
+function saveUser(){
+
+
+  var u = $('#username').val();
+
+ var p = $('#passw').val();
+  testUser(u,p);
+}
+
+
+function testUser(u,p){
+
+if(u && u!=''&&p && p!=''){
+
+  $.ajax
+    ({
+      type: "GET",
+      url: logger.couchdbprotocol+"://"+logger.couchdb+"/_users/_all_docs?include_docs=true",
+      beforeSend: function (xhr) {
+xhr.setRequestHeader("Authorization", "Basic " + btoa(u+":" + p));
+},
+dataType: 'json',
+      data: '{"include_docs":"true"}',
+      success: function (data){
+
+        sessionStorage.setItem('adminUser', u);
+        sessionStorage.setItem('adminPassw', p);
+
+        $('#vbody').html('');
+        var c=0;
+
+for(var i=0;i<data.rows.length;i++){
+
+  var doc=data.rows[i].doc
+
+  if (doc.email){
+console.log(doc);
+    c=c+1;
+        $('#vbody').append(c+') <a href="/users/'+doc.name+'">'+doc.name+'</a><br>');
+
+
+  }
+
+}
+       },
+       error:function(err){
+         console.error(err);
+
+       }
+  });
+
+
+
+} else {
+
+  loadlogin();
+
+
+}
+}
+
+
+</script>

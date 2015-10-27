@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/pouchdb.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/import/logger.js?app_id=ctiao"></script>
+
+  </head>
+  <body>
+testpage
+<a href="javascript:login()">login</a>
+<a href="javascript:login()">new machine</a>
+
+<script>
+function login(){
+
+  LoggWin('login','main',function(data){
+
+    console.log(data)
+  })
+
+}
+function machine(){
+
+  LoggWin('login','main',function(data){
+
+    console.log(data)
+  })
+
+}
+
+</script>
+</body>
+</html>

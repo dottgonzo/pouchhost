@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/lib/jquery.min.js"></script>
+  <script src="/lib/pouchdb.min.js"></script>
+    <script src="/lib/base.js"></script>
+
+
+
+    <!--<script src="/lib/pouchdb.authentication.min.js"></script>-->  </head>
+  <body>
+  <div id="body">
+
+
+
+
+    <div id="vbody"></div>
+
+</div>
+<script>
+
+
+
+
+var sessdb = sessionStorage.getItem('db') ? sessionStorage.getItem('db') : '';
+var passw = sessionStorage.getItem('passw') ? sessionStorage.getItem('passw') : '';
+var username = sessionStorage.getItem('username') ? sessionStorage.getItem('username') : '';
+function inIframe() {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
+if($.urlParam('app_id')){
+  var appid_string='<input type="hidden" id="login_app_id" value="'+$.urlParam('app_id')+'">';
+
+}else{
+
+
+  var appid_string='app <input type="text" id="login_app_id"><br>';
+
+}
+
+var r=appid_string+'user <input type="text" id="username" value="'+username+'"><br>email <input type="text" id="email"><br>password <input type="text" id="passw" value="'+passw+'"><button onclick="register()">register</button><br><a href="/reset.html">recover password</a>';
+var l=appid_string+'user <input type="text" id="username"><br>password <input type="text" id="passw"><button onclick="register()">register</button><br><a href="?action=register">register</a>';
+
+function checkuser(u){
+
+  $.post('/auth', { username: u }, function(data){
+
+if(data.error){
+
+
+} else {
+
+}
+
+
+  });
+}
+
+ if($.urlParam('action')=='register') {
+  $('#vbody').html(r);
+
+} else if($.urlParam('action')=='login') {
+
+    $('#vbody').html(l);
+} else if($.urlParam('action')=='newdb') {
+
+    $('#vbody').html(l);
+
+} else if (sessdb!='' && username!='' && passw!=''){
+  var db = new PouchDB(logger.couchdbprotocol+'://'+username+':'+passw+'@'+logger.couchdb+'/'+sessdb).then(function(d){
+    authorized();
+
+  })
+}
+
+
+function authorized(data){
+
+  if (inIframe()){
+
+    parent.fromiframelogged(data);
+    $('#vbody').html('oook');
+
+  }
+
+}
+
+
+
+
+function register(){
+var username=$('#username').val();
+var passw=$('#passw').val();
+var app_id=$('#login_app_id').val();
+
+if($.urlParam('action')=='register'){
+  var email=$('#email').val();
+
+  var register=true;
+}else if($.urlParam('action')=='newdb'){
+  var email=false;
+
+  var register=true;
+} else {
+  var email=false;
+
+  var register=false;
+
+
+}
+if($.urlParam('back')){
+
+  var back=$.urlParam('back');
+
+} else {
+
+  var back=false;
+
+
+}
+
+$.post('/auth', { username: username, email: email, passw: passw, register:register,app_id:app_id, back:back }, function(data){
+if (data.success){
+
+//  sessionStorage.setItem('db', data.db);
+//  sessionStorage.setItem('username', username);
+//  sessionStorage.setItem('passw', passw);
+
+  authorized(data);
+
+} else {
+  alert(data.error);
+
+}
+});
+
+}
+</script>
