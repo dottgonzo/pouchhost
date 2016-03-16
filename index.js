@@ -1113,15 +1113,20 @@ testapp_id(app_id,function(data){
               var oldbs=JSON.parse(body).db;
 
               var oldb=false;
-var machines=[]
+var machines=[];
+var appdb
               for(var i=0;i<oldbs.length;i++){
                 if (oldbs[i].app_id==app_id&&oldbs[i].dbtype=='machine'){
                   oldbs[i].slave.database=oldbs[i].dbname;
+                  oldbs[i].slave.label=oldbs[i].label;
                   machines.push(oldbs[i].slave);
+                } else if(oldbs[i].app_id==app_id&&oldbs[i].dbtype=='mine'){
+                    appdb={db:oldbs[i].slave};
+                    
                 }
               }
 
-              cb(machines)
+              cb({appdb:appdb,machines:machines})
 
 
 
