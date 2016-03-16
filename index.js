@@ -1121,7 +1121,7 @@ var appdb
                   oldbs[i].slave.label=oldbs[i].label;
                   machines.push(oldbs[i].slave);
                 } else if(oldbs[i].app_id==app_id&&oldbs[i].dbtype=='mine'){
-                    appdb={db:{db:oldbs[i].dbname,slaveuser:oldbs[i].slave.username,slavepassw:oldbs[i].slave.password}};
+                    appdb={db:oldbs[i].dbname,slaveuser:oldbs[i].slave.username,slavepassw:oldbs[i].slave.password};
                     
                 }
               }
