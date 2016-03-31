@@ -1119,7 +1119,9 @@ var appdb
                 if (oldbs[i].app_id==app_id&&oldbs[i].dbtype=='machine'){
                   oldbs[i].slave.database=oldbs[i].dbname;
                   oldbs[i].slave.label=oldbs[i].label;
-                  machines.push(oldbs[i].slave);
+                  var machinecrede=oldbs[i].slave;
+                  machinecrede.label=oldbs[i].label;
+                  machines.push(machinecrede);
                 } else if(oldbs[i].app_id==app_id&&oldbs[i].dbtype=='mine'){
                     appdb={db:oldbs[i].dbname,slaveuser:oldbs[i].slave.username,slavepassw:oldbs[i].slave.password};
                     
