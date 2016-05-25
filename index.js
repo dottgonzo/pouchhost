@@ -27,7 +27,7 @@ if(!pathExists.sync(conf)){
   console.log('conf file not present')
   cp.sync('./conf.example.json', conf)
 }
-config = require('simpler-config').load(require(conf)); // carica il file di configurazione (si poteva usare anche un modulo che leggeva un json semplicemente, ma questo ha alcune funzionalità che possono tornare utili)
+config = require(conf);
 
 
 
