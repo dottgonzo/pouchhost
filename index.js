@@ -3,8 +3,7 @@ cors = require('cors'),
 app     = express(),
 PouchDB = require('pouchdb'),
 uid=require('uid'),
-reload = require('reload'),
-http = require('http'),
+rhttp = require('http'),
 rs = require('random-strings'),
 request = require('request'),
 bodyParser = require('body-parser'),
@@ -1375,7 +1374,6 @@ res.json({success:true,status:code,token: token});
 
 
 
-reload(server, app);
 server.on('error', onError);
 
 
